@@ -1,9 +1,15 @@
 import { Application, Router } from "./src/deps.ts";
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
 import router from "./src/router.ts";
 import { staticFileMidd } from "./src/staticFileMidd.ts";
 
 const app = new Application();
 const PORT = 8008;
+
+// Enable Cors to use in dev
+app.use(
+  oakCors(),
+);
 
 app.use(staticFileMidd);
 app.use(router.routes());

@@ -3,28 +3,40 @@ import './App.css';
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
 import { useForm } from "react-hook-form";
 
-const responseGoogle = (response) => {
-  console.log(response);
+const responseGoogle  = async (response) => {
+  await fetch('http://localhost:8008/addconfigs', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({response})
+  });
 }
 
-const logout = (response) => {
-  console.log(response);
+const logout = () => {
+  console.log('logout')
 }
 
 const onSubmit = data => {
   alert(JSON.stringify(data));
 };
 
+const error = response => {
+  console.error(response)
+}
+
 function App() {
 
   const { register, handleSubmit } = useForm();
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
 
   useEffect(() => {
     fetch('http://localhost:8008/configs', {method: 'GET'})
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((res) => setData(res))
   }, [setData]);
+
 
   return (
     <div className="App">
@@ -33,12 +45,14 @@ function App() {
         clientId={`${data.Client_ID}`}
         buttonText="Login"
         onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={'single_host_origin'} />
+        onFailure={error}
+        cookiePolicy={'single_host_origin'} 
+        theme="dark" />
         <GoogleLogout
+          theme="dark"
           clientId={`${data.Client_ID}`}
           buttonText="Logout"
-          onLogoutSuccess={logout}
+          onLogoutSuccess={responseGoogle}
         >
         </GoogleLogout>
         </> : null}
@@ -48,6 +62,7 @@ function App() {
       <label>Your API Token</label>
       <input name="API_Token" ref={register} defaultValue={data?.API_Token}/>
       <input type="submit" />
+      <span>if you are doing a new stream/live you should login again.</span>
     </form>
 
     </div>

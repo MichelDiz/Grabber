@@ -29,7 +29,7 @@ let addAccessTokenToken = `mutation($patch: UpdateConfigsInput!) {
     }
  }`;
 
- let addBasicCred = `mutation($patch: UpdateConfigsInput!) {
+let addBasicCred = `mutation($patch: UpdateConfigsInput!) {
   updateConfigs(input: $patch ) {
     configs {
       id
@@ -65,9 +65,7 @@ export default {
     }
 
     if (!_data?.response?.API_Token) {
-      console.log("primeiro")
       _data = _data.response.wc;
-      console.log("_data", _data)
       let { access_token, expires_in, expires_at } = _data;
       let update = {
         patch: {
@@ -79,10 +77,8 @@ export default {
       };
       await mutateGraphQL(false, addAccessTokenToken, update);
     } else {
-      console.log("segundo")
       _data = _data.response;
       let { API_Token, Client_ID } = _data;
-      console.log("_data", _data)
       let update = {
         patch: {
           filter: {
@@ -91,10 +87,9 @@ export default {
           set: { API_Token, Client_ID },
         },
       };
-  
+
       await mutateGraphQL(false, addBasicCred, update);
     }
-
     ctx.response.status = 200;
     ctx.response.body = "OK";
   },

@@ -1,7 +1,6 @@
 import { RouterContext, Status } from "../deps.ts";
 import { mutateGraphQL, queryGraphQL } from "../helpers.ts";
 
-
 export default {
   addObject: async (ctx: RouterContext) => {
     let _data;

@@ -3,8 +3,8 @@ import './App.css';
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
 import { useForm } from "react-hook-form";
 
-const responseGoogle  = async (response) => {
-  await fetch('http://localhost:8008/addconfigs', {
+const responseGoogle  = (response) => {
+   fetch('http://localhost:8008/addconfigs', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -18,9 +18,16 @@ const logout = () => {
   console.log('logout')
 }
 
-const onSubmit = data => {
-  alert(JSON.stringify(data));
-};
+const onSubmit  = async (response) => {
+  await fetch('http://localhost:8008/addconfigs', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({response})
+  });
+}
 
 const error = response => {
   console.error(response)
@@ -52,15 +59,15 @@ function App() {
           theme="dark"
           clientId={`${data.Client_ID}`}
           buttonText="Logout"
-          onLogoutSuccess={responseGoogle}
+          onLogoutSuccess={logout}
         >
         </GoogleLogout>
         </> : null}
-      <form onSubmit={handleSubmit(data => setData(data))} className="form">
+      <form onSubmit={handleSubmit(onSubmit)} className="form">
       <label>Client ID</label>
-      <input name="Client_ID" ref={register} defaultValue={data?.Client_ID}/>
+      <input name="Client_ID" ref={register({ required: true})} defaultValue={data?.Client_ID}/>
       <label>Your API Token</label>
-      <input name="API_Token" ref={register} defaultValue={data?.API_Token}/>
+      <input name="API_Token" ref={register({ required: true })} defaultValue={data?.API_Token}/>
       <input type="submit" />
       <span>if you are doing a new stream/live you should login again.</span>
     </form>

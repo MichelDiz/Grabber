@@ -29,6 +29,16 @@ let addAccessTokenToken = `mutation($patch: UpdateConfigsInput!) {
     }
  }`;
 
+ let addBasicCred = `mutation($patch: UpdateConfigsInput!) {
+  updateConfigs(input: $patch ) {
+    configs {
+      id
+      API_Token
+      Client_ID
+    }
+  }
+}`;
+
 export default {
   setupSchema: async (ctx: RouterContext) => {
     await mutateGraphQL(true, addSchema);
@@ -52,21 +62,38 @@ export default {
       ctx.throw(Status.BadRequest, "Bad Request");
     } else {
       _data = await body.value;
-      _data = _data.response.wc;
     }
 
-    let { access_token, expires_in, expires_at } = _data;
-
-    let update = {
-      patch: {
-        filter: {
-          id: ["0x1"],
+    if (!_data?.response?.API_Token) {
+      console.log("primeiro")
+      _data = _data.response.wc;
+      console.log("_data", _data)
+      let { access_token, expires_in, expires_at } = _data;
+      let update = {
+        patch: {
+          filter: {
+            id: ["0x1"],
+          },
+          set: { access_token, expires_in, expires_at },
         },
-        set: { access_token, expires_in, expires_at },
-      },
-    };
-
-    await mutateGraphQL(false, addAccessTokenToken, update);
+      };
+      await mutateGraphQL(false, addAccessTokenToken, update);
+    } else {
+      console.log("segundo")
+      _data = _data.response;
+      let { API_Token, Client_ID } = _data;
+      console.log("_data", _data)
+      let update = {
+        patch: {
+          filter: {
+            id: ["0x1"],
+          },
+          set: { API_Token, Client_ID },
+        },
+      };
+  
+      await mutateGraphQL(false, addBasicCred, update);
+    }
 
     ctx.response.status = 200;
     ctx.response.body = "OK";

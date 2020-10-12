@@ -53,7 +53,7 @@ function App() {
         buttonText="Login"
         onSuccess={responseGoogle}
         onFailure={error}
-        cookiePolicy={'single_host_origin'} 
+        cookiePolicy={'single_host_origin'}
         theme="dark" />
         <GoogleLogout
           theme="dark"

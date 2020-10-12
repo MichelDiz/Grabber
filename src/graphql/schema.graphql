@@ -1,0 +1,9 @@
+type Configs {
+    id: ID!
+    API_Token: String
+    Client_ID: String
+    expires_at: Int
+    access_token: String
+    expires_in: String
+    first_issued_at: String
+}

@@ -1,0 +1,7 @@
+query Configs{
+    getConfigs(id: "0x1"){
+        id
+        API_Token
+        Client_ID
+   }
+}

@@ -1,0 +1,9 @@
+mutation($patch: UpdateConfigsInput!) {
+    updateConfigs(input: $patch ) {
+      configs {
+        id
+        access_token
+        expires_at
+      }
+    }
+ }

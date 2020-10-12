@@ -23,7 +23,10 @@ export const queryGraphQL = async (
         ? { query: `${query}`, "variables": `${vars}` }
         : { query: `${query}` },
     ),
-  }).then(handleErrors).then((res) => res.json());
+  }).then(handleErrors).then((res) => res.json()).then((res) => {
+    console.log(res);
+    return res;
+  });
 };
 
 export const mutateGraphQL = async (
@@ -50,7 +53,8 @@ export const mutateGraphQL = async (
     body: JSON.stringify(
       variables ? { query: `${query}`, variables } : { query: `${query}` },
     ),
-  }).then(handleErrors).then((res) => res.json()).then((res) =>
-    res && console.log(res)
-  );
+  }).then(handleErrors).then((res) => res.json()).then((res) => {
+    console.log(res);
+    return res;
+  });
 };

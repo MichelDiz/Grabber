@@ -1,52 +1,22 @@
 import { RouterContext, Status } from "../deps.ts";
 import { mutateGraphQL, queryGraphQL } from "../helpers.ts";
-
-let query = `query test1{
-    getConfigs(id: "0x1"){
-      id
-      API_Token
-      Client_ID
-    }
-    }`;
-
-let addSchema = `mutation {
-    updateGQLSchema(
-      input: { set: { schema: "type Configs { id: ID! , API_Token: String, Client_ID: String expires_at: Int, access_token: String, expires_in: String, first_issued_at: String }"}})
-    {
-      gqlSchema {
-        generatedSchema
-      }
-    }
-  }`;
-
-let addAccessTokenToken = `mutation($patch: UpdateConfigsInput!) {
-    updateConfigs(input: $patch ) {
-      configs {
-        id
-        access_token
-        expires_at
-      }
-    }
- }`;
-
-let addBasicCred = `mutation($patch: UpdateConfigsInput!) {
-  updateConfigs(input: $patch ) {
-    configs {
-      id
-      API_Token
-      Client_ID
-    }
-  }
-}`;
+import {
+  addAccessTokenToken,
+  addBasicCred,
+  addSchema,
+  Configs,
+  Schema,
+} from "../graphql/index.ts";
 
 export default {
   setupSchema: async (ctx: RouterContext) => {
-    await mutateGraphQL(true, addSchema);
+    let patch = { set: { schema: Schema} }
+    await mutateGraphQL(true, addSchema, {patch});
     ctx.response.status = 200;
     ctx.response.body = "OK";
   },
   queryConfigs: async (ctx: RouterContext) => {
-    await queryGraphQL(false, query).then((res) =>
+    await queryGraphQL(false, Configs).then((res) =>
       ctx.response.body = res.data.getConfigs
     );
     ctx.response.status = 200;

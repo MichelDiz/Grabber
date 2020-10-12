@@ -1,0 +1,8 @@
+mutation ($patch: UpdateGQLSchemaInput!){
+    updateGQLSchema(input: $patch)
+    {
+      gqlSchema {
+        generatedSchema
+      }
+    }
+  }

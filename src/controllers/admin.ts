@@ -1,5 +1,5 @@
 import { RouterContext, Status } from "../deps.ts";
-import { mutateGraphQL, queryGraphQL } from "../helpers.ts";
+import { mutateDQL, mutateGraphQL, queryGraphQL } from "../helpers.ts";
 import {
   addAccessTokenToken,
   addBasicCred,
@@ -10,8 +10,9 @@ import {
 
 export default {
   setupSchema: async (ctx: RouterContext) => {
-    let patch = { set: { schema: Schema} }
-    await mutateGraphQL(true, addSchema, {patch});
+    await mutateDQL();
+    let patch = { set: { schema: Schema } };
+    await mutateGraphQL(true, addSchema, { patch });
     ctx.response.status = 200;
     ctx.response.body = "OK";
   },
@@ -57,7 +58,6 @@ export default {
           set: { API_Token, Client_ID },
         },
       };
-
       await mutateGraphQL(false, addBasicCred, update);
     }
     ctx.response.status = 200;

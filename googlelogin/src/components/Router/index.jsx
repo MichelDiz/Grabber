@@ -1,21 +1,27 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 
 import Home from "../../pages/Home";
 import Login from "../../pages/Login";
 
-const Router = () => {
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 
+const Router = () => {
   return (
     <BrowserRouter>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </ul>
+    <AppBar position="static">
+      <Toolbar>
+      <Button color="inherit" >
+        <Link to="/" className='FakeBTN'>Home</Link>
+      </Button>
+      <Button color="inherit" >
+        <Link to="/login" className='FakeBTN'>Login</Link>
+      </Button>
+      </Toolbar>
+    </AppBar>
+
       <Switch>
         <Route exact path="/">
           <Home />

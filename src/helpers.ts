@@ -64,6 +64,7 @@ export const mutateGraphQL = async (
 
 export const mutateDQL = async () => {
   let URL = "http://localhost:8080/mutate?commitNow=true";
+  let ZERO = "http://localhost:6080/assign?what=uids&num=2";
   function handleErrors(res: any) {
     if (!res.ok) {
       console.error("Got error from Dgraph's GraphQL API");
@@ -71,6 +72,7 @@ export const mutateDQL = async () => {
     }
     return res;
   }
+  fetch(ZERO, {method: "GET"})
   return await fetch(URL, {
     method: "POST",
     headers: {

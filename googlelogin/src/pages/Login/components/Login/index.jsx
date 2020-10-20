@@ -38,12 +38,19 @@ const responseGoogle  = (response) => {
     const [data, setData] = useState({});
   
     useEffect(() => {
-      fetch('http://localhost:8008/configs', {method: 'GET'})
+      function handleErrors(res) {
+        if (!res.ok) {
+          console.error("Got an error");
+          throw res.status;
+        } 
+        return res;
+      }
+      fetch('http://localhost:8008/configs', { method: 'GET' })
+        .then(handleErrors)
         .then((res) => res.json())
-        .then((res) => setData(res))
+        .then((res) => setData(res.getConfigs))
     }, [setData]);
-  
-  
+
     return (
       <div className="App">
         {data && data.Client_ID ? <>

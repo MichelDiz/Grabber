@@ -18,7 +18,7 @@ export default {
   },
   queryConfigs: async (ctx: RouterContext) => {
     await queryGraphQL(false, Configs).then((res) =>
-      ctx.response.body = res.data.getConfigs
+      ctx.response.body = res.data
     );
     ctx.response.status = 200;
     ctx.response.type = "application/json";

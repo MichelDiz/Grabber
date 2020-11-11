@@ -6,4 +6,40 @@ type Configs {
     access_token: String
     expires_in: String
     first_issued_at: String
+    pull_LiveBroadcast: Boolean
+}
+
+type LiveBroadcast {
+    id: String! @id
+    #live_id: String #@id
+    publishedAt: String
+    title: String
+    liveChatId: String
+    liveChat: LiveChat
+}
+
+type LiveChat {
+    id: String! @id
+    nextPageToken: String 
+    etag: String
+    items: [Message]
+}
+
+type Message {
+    messageId: String! @id
+    publishedAt: String 
+    authorChannelId: String
+    messageText: String
+    authorDetails: [Person]
+}
+
+type Person {
+    channelId: String! @id
+    channelUrl: String
+    displayName: String
+    profileImageUrl: String
+    isVerified: Boolean
+    isChatOwner: Boolean
+    isChatSponsor: Boolean
+    isChatModerator: Boolean
 }

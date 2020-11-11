@@ -1,0 +1,19 @@
+upsert {
+  query {
+    v as var(func: type(Configs)) @filter(eq(Configs.pull_LiveBroadcast, "true"))
+    f as var(func: type(Configs)) @filter(eq(Configs.pull_LiveBroadcast, "false"))
+  }
+
+  mutation @if(eq(len(v), 1)) {
+    set {
+      uid(v) <Configs.pull_LiveBroadcast> "false" .
+    }
+  }
+
+  mutation @if(eq(len(f), 1))  {
+    set {
+      uid(f) <Configs.pull_LiveBroadcast> "true" .
+    }
+  }
+
+}

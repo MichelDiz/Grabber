@@ -1,0 +1,5 @@
+{
+  set {
+    <0x1> <dgraph.type> "Configs" .
+    }
+}

@@ -16,7 +16,15 @@ const addBasicCred = decoder.decode(
 const addSchema = decoder.decode(
   await Deno.readFile(`${Root}/addSchema.graphql`),
 );
-// console.log(JSON.stringify(text) )
-// console.log(JSON.stringify(Configs) )
+const addLiveBroadcast = decoder.decode(
+  await Deno.readFile(`${Root}/addSchema.graphql`),
+);
 
-export { addAccessTokenToken, addBasicCred, addSchema, Configs, Schema };
+export {
+  addAccessTokenToken,
+  addBasicCred,
+  addLiveBroadcast,
+  addSchema,
+  Configs,
+  Schema,
+};

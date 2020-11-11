@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 
 import Home from "../../pages/Home";
 import Login from "../../pages/Login";
+import Settings from "../../pages/Settings";
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,6 +20,9 @@ const Router = () => {
       <Button color="inherit" >
         <Link to="/login" className='FakeBTN'>Login</Link>
       </Button>
+      <Button color="inherit" >
+        <Link to="/settings" className='FakeBTN'>Settings</Link>
+      </Button>
       </Toolbar>
     </AppBar>
 
@@ -28,6 +32,9 @@ const Router = () => {
         </Route>
         <Route exact path="/login">
           <Login />
+        </Route>
+        <Route exact path="/settings">
+          <Settings />
         </Route>
       </Switch>
     </BrowserRouter>

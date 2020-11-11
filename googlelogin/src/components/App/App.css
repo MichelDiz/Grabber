@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  max-width: 600px;
+  margin: 22px auto;
 }
 
 .App-logo {
@@ -143,11 +145,6 @@ input[type="button"]:hover {
 input[type="button"],
 input[type="submit"] {
   -webkit-appearance: none;
-}
-
-.App {
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 form {

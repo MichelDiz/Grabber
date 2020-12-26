@@ -41,9 +41,9 @@ export default {
     } else {
       _data = await body.value;
     }
-
+    
     if (!_data?.response?.API_Token) {
-      _data = _data.response.wc;
+      _data = _data.response.tokenObj;
       let { access_token, expires_in, expires_at } = _data;
       let update = {
         patch: {

@@ -1,0 +1,9 @@
+subscription subscribeMessages{
+    queryMessage {
+        messageId
+        messageText
+        authorDetails {
+        profileImageUrl
+      }
+   }
+}

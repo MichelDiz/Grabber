@@ -1,0 +1,9 @@
+query Messages{
+    queryMessage {
+        messageId
+        messageText
+        authorDetails {
+        profileImageUrl
+      }
+   }
+}

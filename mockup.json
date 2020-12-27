@@ -1,0 +1,60 @@
+{
+    "set": [
+       {
+          "LiveChat.id": "String",
+          "LiveChat.nextPageToken": "f53f34f34f34",
+          "LiveChat.etag": "etag",
+          "dgraph.type": "LiveChat",
+          "LiveChat.items": [
+             {
+                "Message.messageId": "f53f34f34f34GGGGGGG",
+                "Message.publishedAt": "2020",
+                "Message.authorChannelId": "Lucasid",
+                "Message.messageText": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
+                "Message.authorDetails": [
+                   {
+                      "Person.channelId": "Lucasid",
+                      "Person.channelUrl": "https://www.youtube.com/user/Lucas",
+                      "Person.displayName": "Lucas",
+                      "Person.profileImageUrl": "https://yt3.ggpht.com/ytc/AAUvwnh9_qoajBoWtOjcfUCKCv3gBySz2T_ZLulmvfPpaw=s48-c-k-c0xffffffff-no-rj-mo",
+                      "Person.isVerified": "false",
+                      "Person.isChatOwner": "false",
+                      "Person.isChatSponsor": "false",
+                      "Person.isChatModerator": "false",
+                      "dgraph.type": "Person"
+                   }
+                ],
+                "dgraph.type": "Message"
+             }
+          ]
+       },
+       {
+          "LiveChat.id": "String",
+          "LiveChat.nextPageToken": "f53f34f34f34",
+          "LiveChat.etag": "etag",
+          "dgraph.type": "LiveChat",
+          "LiveChat.items": [
+             {
+                "Message.messageId": "f53f34f34f34GGGGGGG",
+                "Message.publishedAt": "2020",
+                "Message.authorChannelId": "Fernandoid",
+                "Message.messageText": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
+                "Message.authorDetails": [
+                   {
+                      "Person.channelId": "Fernandoid",
+                      "Person.channelUrl": "https://www.youtube.com/user/Fernando",
+                      "Person.displayName": "Fernando",
+                      "Person.profileImageUrl": "https://yt3.ggpht.com/ytc/AAUvwnh9_qoajBoWtOjcfUCKCv3gBySz2T_ZLulmvfPpaw=s48-c-k-c0xffffffff-no-rj-mo",
+                      "Person.isVerified": "false",
+                      "Person.isChatOwner": "false",
+                      "Person.isChatSponsor": "false",
+                      "Person.isChatModerator": "false",
+                      "dgraph.type": "Person"
+                   }
+                ],
+                "dgraph.type": "Message"
+             }
+          ]
+       }
+    ]
+ }

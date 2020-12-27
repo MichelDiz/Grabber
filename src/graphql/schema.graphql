@@ -25,7 +25,7 @@ type LiveChat {
     items: [Message]
 }
 
-type Message {
+type Message @withSubscription {
     messageId: String! @id
     publishedAt: String 
     authorChannelId: String

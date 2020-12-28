@@ -1,9 +1,9 @@
-subscription subscribeMessages{
-    queryMessage {
-        messageId
-        messageText
-        authorDetails {
-        profileImageUrl
-      }
-   }
+subscription subscribeMessages($offset: Int) {
+  queryMessage(first: 11, order: { desc: messageId }, offset: $offset) {
+    messageId
+    messageText
+    authorDetails {
+      profileImageUrl
+    }
+  }
 }

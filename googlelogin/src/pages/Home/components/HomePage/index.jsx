@@ -5,6 +5,8 @@ import { loader } from "graphql.macro";
 const date0 = new Date();
 let now = new Date();
 
+const default_offset = "0";
+
 const isTokenExpired = () => {
   //const token = localStorage.getItem("access_token");
   try {
@@ -17,20 +19,38 @@ const isTokenExpired = () => {
 };
 
 const GET_CONFIGS = loader("../../../../graphql/subscribeMessages.graphql");
+const COUNT_MSGS = loader("../../../../graphql/subscCountMsgs.graphql");
 
 function GetData() {
-  const { loading, error, data } = useSubscription(GET_CONFIGS);
+  const { loading, error, data } = useSubscription(GET_CONFIGS, {
+    variables: { default_offset },
+  });
 
   if (loading) return null;
-  if (error) return `Error! ${error}`;
+  if (error) return `Error! ${JSON.stringify(error)}`;
 
   return <main>{JSON.stringify(data)}</main>;
 }
-function ChatWall() {
-  const { loading, error, data } = useSubscription(GET_CONFIGS);
+function CountMsgs() {
+  const { loading, error, data } = useSubscription(COUNT_MSGS);
 
   if (loading) return null;
-  if (error) return `Error! ${error}`;
+  if (error) return `Error! ${JSON.stringify(error)}`;
+
+  return (
+    <div className="App">
+      <h1>Total of messages: {JSON.stringify(data.aggregateMessage.count)}</h1>
+      <p>Total of {Math.round(data.aggregateMessage.count / 6)} pages</p>
+    </div>
+  );
+}
+function ChatWall() {
+  const { loading, error, data } = useSubscription(GET_CONFIGS, {
+    variables: { default_offset },
+  });
+
+  if (loading) return null;
+  if (error) return `Error! ${JSON.stringify(error)}`;
 
   return (
     <>
@@ -49,7 +69,13 @@ function ChatMessage(props) {
     <>
       <div className={`message`}>
         <div>
-          <img src={authorDetails ? "https://yt3.ggpht.com/ytc/AAUvwnh9_qoajBoWtOjcfUCKCv3gBySz2T_ZLulmvfPpaw=s48-c-k-c0xffffffff-no-rj-mo" : authorDetails[0].profileImageUrl} />
+          <img
+            src={
+              authorDetails
+                ? "https://yt3.ggpht.com/ytc/AAUvwnh9_qoajBoWtOjcfUCKCv3gBySz2T_ZLulmvfPpaw=s48-c-k-c0xffffffff-no-rj-mo"
+                : authorDetails[0].profileImageUrl
+            }
+          />
         </div>
         <div>
           <p>{messageText}</p>
@@ -65,6 +91,7 @@ export default class index extends Component {
     // if (current_time > jwt.exp) { /* expired */ }
     return (
       <div>
+        <CountMsgs />
         <ChatWall />
         <GetData />
         {JSON.stringify(new Date().getTimezoneOffset())} <br></br>

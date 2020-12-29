@@ -10,7 +10,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 
 function CheckSearch(e) {
-  console.log("expr", e.expr);
   switch (e.expr) {
     case "?home":
       return (
@@ -48,13 +47,8 @@ function CheckSearch(e) {
 }
 
 const Router = () => {
-  // console.log(this.props.location.pathname);
-
   return (
     <BrowserRouter>
-      {console.log(window.location.pathname)}
-      {console.log(window.location.search)}
-      {console.log(!!window.location.search)}
       <AppBar position="static">
         <Toolbar>
           <Button color="inherit">

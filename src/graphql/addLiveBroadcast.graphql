@@ -1,9 +1,5 @@
-mutation($patch: UpdateConfigsInput!) {
-  updateConfigs(input: $patch) {
-    configs {
-      id
-      API_Token
-      Client_ID
-    }
+mutation($patch: [AddLiveBroadcastInput!]!) {
+  addLiveBroadcast(input: $patch) {
+    numUids
   }
-}
+ }

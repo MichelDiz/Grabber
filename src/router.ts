@@ -29,10 +29,5 @@ router
 //     console.log(response);
 //    });
 
-// obj.liveChat({
-//     part: "snippet",
-//     liveChatId: "00000000"}).then(function(response: any){
-//     console.log(response);
-//    });
 
 export default router;

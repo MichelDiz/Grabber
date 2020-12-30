@@ -17,7 +17,7 @@ const addSchema = decoder.decode(
   await Deno.readFile(`${Root}/addSchema.graphql`),
 );
 const addLiveBroadcast = decoder.decode(
-  await Deno.readFile(`${Root}/addSchema.graphql`),
+  await Deno.readFile(`${Root}/addLiveBroadcast.graphql`),
 );
 
 export {

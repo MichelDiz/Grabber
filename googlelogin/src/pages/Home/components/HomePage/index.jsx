@@ -39,8 +39,8 @@ function CountMsgs() {
 
   return (
     <div className="App">
-      <h1>Total of messages: {JSON.stringify(data.aggregateMessage.count)}</h1>
-      <p>Total of {Math.round(data.aggregateMessage.count / 6)} pages</p>
+      <h1>Total of messages: {data.aggregateMessage? JSON.stringify(data.aggregateMessage.count): 0 }</h1>
+      <p>Total of {data.aggregateMessage? Math.round(data.aggregateMessage.count / 6): 0} pages</p>
     </div>
   );
 }

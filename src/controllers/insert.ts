@@ -1,4 +1,4 @@
-import {RouterContext, Status, YouTube} from "../deps.ts";
+import {RouterContext, Status, YouTube, YouTube_live} from "../deps.ts";
 import {mutateDQL, mutateGraphQL, queryGraphQL} from "../helpers.ts";
 import {addLiveBroadcast, Configs} from "../graphql/index.ts";
 import {upsertConfig} from "../dql/index.ts";
@@ -41,12 +41,12 @@ export default {
 
         (async () => {
 
-            let obj = new YouTube(query.API_Token, query.access_token);
+            let obj = new YouTube_live(query.API_Token, query.access_token);
             let _pull = true;
 
             while (_pull) {
                 try {
-                    const addInput = await getLives(obj, "liveBroadcasts", {
+                    const addInput = await getLives(obj, "liveBroadcasts_list", {
                         part: "snippet",
                         broadcastStatus: "active",
                         broadcastType: "all"
@@ -60,7 +60,7 @@ export default {
                             id
                         } = response;
 
-                        const liveChat = await getLives(obj, "liveChat", {
+                        const liveChat = await getLives(obj, "liveChat_list", {
                             part: "snippet",
                             liveChatId
                         });
@@ -87,6 +87,7 @@ export default {
                     await mutateGraphQL(false, addLiveBroadcast, addInput);
 
                 } catch (e) {
+                    console.log(e)
                     console.log("Message => ", e.message);
                     console.log("Action  => ", "Break the loop. No data to be pulling.");
                     break;
@@ -136,7 +137,7 @@ export default {
             while (_continue == true) {
 
                 try {
-                    const liveChat = await getLives(obj, "liveChat", {
+                    const liveChat = await getLives(obj, "liveChat_list", {
                         part: "snippet",
                         liveChatId: _data.liveChatId
                     })

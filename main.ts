@@ -1,3 +1,4 @@
+#!/usr/bin/env -S deno run --allow-net --allow-read
 import { Application, Router } from "./src/deps.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
 import router from "./src/router.ts";
